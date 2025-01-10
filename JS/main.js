@@ -1,10 +1,12 @@
+const deleteAllBtn = document.getElementById("delete-all-btn");
+const alertMessage = document.getElementById("alert-message");
 const taskInput = document.getElementById("task-input");
 const dateInput = document.getElementById("date-input");
 const addButton = document.getElementById("add-btn");
-const alertMessage = document.getElementById("alert-message");
 const todosBody = document.querySelector("tbody");
 
 let todos = [];
+
 try {
   todos = JSON.parse(localStorage.getItem("todos")) || [];
 } catch (error) {
@@ -40,9 +42,9 @@ const displayTodos = () => {
       <td>${todo.date || "No Date"}</td>
       <td>${todo.complete ? "Completed" : "Pending"}</td>
       <td>
-        <button onclick="completeHandler(${index})">Edit</button>
-        <button onclick="completeHandler(${index})">DO</button>
-        <button onclick="deleteHandler(${index})">Delete</button>
+        <button>Edit</button>
+        <button>DO</button>
+        <button>Delete</button>
       </td>
     `;
     todosBody.appendChild(row);
@@ -69,6 +71,18 @@ const addHandler = () => {
   showAlert("Todo added successfully!", "success");
 };
 
-addButton.addEventListener("click", addHandler);
+const deleteHandler = () => {
+  if (todos.length) {
+    todos = [];
+    saveToLocalStorage();
+    displayTodos();
+    showAlert("All todos cleared Successfully", "success");
+  } else {
+    showAlert("No Todos to Clear!", "error");
+  }
+};
 
-displayTodos();
+addButton.addEventListener("click", addHandler);
+deleteAllBtn.addEventListener("click", deleteHandler);
+
+window.addEventListener("load", displayTodos);
