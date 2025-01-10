@@ -13,6 +13,9 @@ try {
   console.error("Error parsing todos from localStorage:", error);
   todos = [];
 }
+const generateUniqueId = () => {
+  return `${Date.now()}}`;
+};
 
 const showAlert = (message, type) => {
   alertMessage.innerHTML = "";
@@ -59,6 +62,7 @@ const addHandler = () => {
     return;
   }
   const todo = {
+    id: generateUniqueId(),
     task,
     date,
     complete: false,
