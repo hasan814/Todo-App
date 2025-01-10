@@ -13,6 +13,7 @@ try {
   console.error("Error parsing todos from localStorage:", error);
   todos = [];
 }
+
 const generateUniqueId = () => {
   return `${Date.now()}`;
 };
@@ -146,6 +147,47 @@ const updateHandler = (id) => {
 
   showAlert("Todo updated successfully!", "success");
 };
+
+const filterButtons = document.querySelectorAll(".filter-todos");
+
+const filterHandler = (filterType) => {
+  let filteredTodos = [];
+  if (filterType === "all") filteredTodos = todos;
+  else if (filterType === "pending")
+    filteredTodos = todos.filter((todo) => !todo.complete);
+  else if (filterType === "completed")
+    filteredTodos = todos.filter((todo) => todo.complete);
+  displayFilteredTodos(filteredTodos);
+};
+
+const displayFilteredTodos = (filteredTodos) => {
+  todosBody.innerHTML = "";
+  if (filteredTodos.length === 0) {
+    todosBody.innerHTML = "<tr><td colspan='4'>No Task Found!</td></tr>";
+    return;
+  }
+  filteredTodos.forEach((todo) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${todo.task || "No Task Name"}</td>
+      <td>${todo.date || "No Date"}</td>
+      <td>${todo.complete ? "Completed" : "Pending"}</td>
+      <td>
+        <button onClick="editHandler('${todo.id}')">Edit</button>
+        <button onClick="toggleHandler('${todo.id}')">DO</button>
+        <button onClick="deleteHandler('${todo.id}')">Delete</button>
+      </td>
+    `;
+    todosBody.appendChild(row);
+  });
+};
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const filterType = event.target.getAttribute("data-filter");
+    filterHandler(filterType);
+  });
+});
 
 addButton.addEventListener("click", addHandler);
 deleteAllBtn.addEventListener("click", deleteAllHandler);
