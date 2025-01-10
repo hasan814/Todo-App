@@ -1,7 +1,19 @@
 const taskInput = document.getElementById("task-input");
 const dateInput = document.getElementById("date-input");
 const addButton = document.getElementById("add-btn");
+const alertMessage = document.getElementById("alert-message");
 
+const showAlert = (message, type) => {
+  alertMessage.innerHTML = "";
+  const alert = document.createElement("p");
+  alert.innerText = message;
+  alert.classList.add("alert");
+  alert.classList.add(`alert-${type}`);
+  alertMessage.append(alert);
+  setTimeout(() => {
+    alert.style.display = "none";
+  }, 2000);
+};
 const todos = [];
 
 const addHandler = () => {
@@ -16,9 +28,10 @@ const addHandler = () => {
     todos.push(todo);
     taskInput.value = "";
     dateInput.value = "";
+    showAlert("Todo added a successfully", "success");
   } else {
+    showAlert("Please enter a todo!", "error");
   }
-  console.log(todos);
 };
 
 addButton.addEventListener("click", addHandler);
