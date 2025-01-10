@@ -45,7 +45,7 @@ const displayTodos = () => {
       <td>${todo.date || "No Date"}</td>
       <td>${todo.complete ? "Completed" : "Pending"}</td>
       <td>
-        <button>Edit</button>
+        <button onClick="editHandler('${todo.id}')">Edit</button>
         <button onClick="toggleHandler('${todo.id}')">${
       todo.complete ? "Undo" : "Do"
     }</button>
@@ -103,6 +103,48 @@ const toggleHandler = (id) => {
   saveToLocalStorage();
   displayTodos();
   showAlert("Todo status updated successfully!", "success");
+};
+
+const editHandler = (id) => {
+  const todoToEdit = todos.find((todo) => todo.id === id);
+
+  if (!todoToEdit) {
+    showAlert("Todo not found!", "error");
+    return;
+  }
+
+  taskInput.value = todoToEdit.task;
+  dateInput.value = todoToEdit.date;
+
+  addButton.textContent = "Update";
+  addButton.removeEventListener("click", addHandler);
+  addButton.addEventListener("click", () => updateHandler(id));
+};
+
+const updateHandler = (id) => {
+  const updatedTask = taskInput.value.trim();
+  const updatedDate = dateInput.value;
+
+  if (!updatedTask) {
+    showAlert("Please enter a valid todo!", "error");
+    return;
+  }
+
+  todos = todos.map((todo) =>
+    todo.id === id ? { ...todo, task: updatedTask, date: updatedDate } : todo
+  );
+  saveToLocalStorage();
+
+  displayTodos();
+
+  taskInput.value = "";
+  dateInput.value = "";
+
+  addButton.textContent = "Add";
+  addButton.removeEventListener("click", updateHandler);
+  addButton.addEventListener("click", addHandler);
+
+  showAlert("Todo updated successfully!", "success");
 };
 
 addButton.addEventListener("click", addHandler);
