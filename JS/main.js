@@ -14,7 +14,11 @@ const showAlert = (message, type) => {
     alert.style.display = "none";
   }, 2000);
 };
-const todos = [];
+const todos = JSON.stringify(localStorage.getItem("todos")) || [];
+
+const saveToLocalStorage = () => {
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
 
 const addHandler = () => {
   const task = taskInput.value;
@@ -26,6 +30,7 @@ const addHandler = () => {
   };
   if (task) {
     todos.push(todo);
+    saveToLocalStorage();
     taskInput.value = "";
     dateInput.value = "";
     showAlert("Todo added a successfully", "success");
