@@ -14,7 +14,7 @@ try {
   todos = [];
 }
 const generateUniqueId = () => {
-  return `${Date.now()}}`;
+  return `${Date.now()}`;
 };
 
 const showAlert = (message, type) => {
@@ -38,7 +38,7 @@ const displayTodos = () => {
     todosBody.innerHTML = "<tr><td colspan='4'>No Task Found!</td></tr>";
     return;
   }
-  todos.forEach((todo, index) => {
+  todos.forEach((todo) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${todo.task || "No Task Name"}</td>
@@ -47,7 +47,7 @@ const displayTodos = () => {
       <td>
         <button>Edit</button>
         <button>DO</button>
-        <button>Delete</button>
+        <button onClick="deleteHandler('${todo.id}')">Delete</button>
       </td>
     `;
     todosBody.appendChild(row);
@@ -75,7 +75,7 @@ const addHandler = () => {
   showAlert("Todo added successfully!", "success");
 };
 
-const deleteHandler = () => {
+const deleteAllHandler = () => {
   if (todos.length) {
     todos = [];
     saveToLocalStorage();
@@ -86,7 +86,15 @@ const deleteHandler = () => {
   }
 };
 
+const deleteHandler = (id) => {
+  const newTodos = todos.filter((todo) => todo.id !== id);
+  todos = newTodos;
+  saveToLocalStorage();
+  displayTodos();
+  showAlert("Todo deleted successfully!", "success");
+};
+
 addButton.addEventListener("click", addHandler);
-deleteAllBtn.addEventListener("click", deleteHandler);
+deleteAllBtn.addEventListener("click", deleteAllHandler);
 
 window.addEventListener("load", displayTodos);
