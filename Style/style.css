@@ -1,0 +1,151 @@
+/* style.css */
+
+:root {
+  --color-primary: #f9d72f;
+  --color-background: #e6e6e6;
+  --color-task: #f7f7f7;
+  --color-success: #36d39a;
+  --color-warning: #fbbe23;
+  --color-error: #f87171;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: radial-gradient(circle, #b99090, var(--color-background));
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-section input[type="text"],
+.input-section input[type="date"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease;
+  background-color: var(--color-task);
+}
+
+.input-section input:focus {
+  box-shadow: 0 0 8px rgba(249, 215, 47, 0.5); /* Use color-primary glow */
+  outline: none;
+}
+
+.Add-btn {
+  padding: 10px 20px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.Add-btn:hover {
+  background-color: var(--color-warning);
+  transform: translateY(-2px);
+}
+
+.todos-operator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todos-operator button {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  background-color: var(--color-task);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.todos-operator button:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: var(--color-task);
+}
+
+table tbody tr:hover {
+  background-color: var(--color-background);
+}
+
+table button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #fff;
+}
+
+table button:nth-child(1) {
+  background-color: var(--color-warning);
+}
+
+table button:nth-child(2) {
+  background-color: var(--color-success);
+}
+
+table button:nth-child(3) {
+  background-color: var(--color-error);
+}
+
+table button:hover {
+  transform: translateY(-2px);
+}

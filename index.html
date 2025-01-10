@@ -7,6 +7,44 @@
     <title>Todo-App</title>
   </head>
   <body>
+    <div class="container">
+      <h2>Todo App</h2>
+      <div class="input-section">
+        <input type="text" placeholder="Add Todo ..." id="task-input" />
+        <input type="date" id="date-input" />
+        <button class="Add-btn">Add</button>
+      </div>
+      <div class="todos-operator">
+        <div>
+          <button class="filter-todos">All</button>
+          <button class="filter-todos">Pending</button>
+          <button class="filter-todos">Completed</button>
+        </div>
+        <button>Delete All</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Text</td>
+          <td>date</td>
+          <td>pending</td>
+          <td>
+            <button>Edit</button>
+            <button>Do</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <script src="./JS/main.js"></script>
   </body>
 </html>
