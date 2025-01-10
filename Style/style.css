@@ -61,7 +61,7 @@ h2 {
   outline: none;
 }
 
-.Add-btn {
+.Add-button {
   padding: 10px 20px;
   background-color: var(--color-primary);
   color: #fff;
@@ -71,7 +71,7 @@ h2 {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.Add-btn:hover {
+.Add-button:hover {
   background-color: var(--color-warning);
   transform: translateY(-2px);
 }
